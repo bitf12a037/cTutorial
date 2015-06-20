@@ -1,0 +1,71 @@
+﻿
+
+<!DOCTYPE html>
+@using Tutorial_Site.BussinessObjects
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VideoTutorial</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+    <link href="assets/css/video-default.css" rel="stylesheet">
+    <script type="text/javascript" src="assets/js/jquery.video-ui.js"></script>
+
+   
+</head>
+<body>
+
+
+    <form action="~/Home/searchVideo" method="post" role="form">
+        <input type="search" name="search" style="margin-left:35%; width:300px;height:30px" placeholder="Enter your Search" />&nbsp;
+        <input type="submit" class="btn btn-danger" value="Search">
+    </form>
+
+    <br />
+    <br />
+    <br />
+
+    @if (ViewBag.video != null)
+    { 
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-8" >
+                @foreach(var x in ViewBag.video)
+                {
+                    <div >
+                        <a href="~/Home/VideoTutorial?id=@x.Id">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <video class="small">
+                                            <source src="~/Videos/@x.videoName" type="video/mp4" />
+                                        </video>
+                                    </td>
+                                    <td style="padding-left:10px"><label>@x.videoName</label></td>
+                                </tr>
+                            </table>
+                        </a>
+                    </div>
+                }
+            </div>
+          @*  <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>*@
+        </div>
+    </div>
+    }
+    else
+    {
+        <h3>NO Match Fount</h3>
+    }
+</body>
+</html>

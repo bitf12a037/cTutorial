@@ -1,0 +1,55 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AskQuestion</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+   
+</head>
+<body>
+    <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <label style="font-size:18px; color:blueviolet;font-weight:bold">@ViewBag.message</label>
+
+        
+        <form role="form" action="~/Home/getQuestion" method="post">
+            <input type="text" name="question1" style="width:300px; height:40px; align-content:center;font-size:large; margin-left:27%;outline-color:blue;" placeholder="Enter Your Question " />&nbsp;
+            <button type="submit" class="btn btn-primary" id="submitQuestion">Submit</button>
+            
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/Home/getSession", function (data) {
+
+                if (data == true) {
+                  
+                }
+                else {
+                    //$("#submitQuestion").hide();
+                    alert("you need to login otherwise you can not post");
+                    $('#submitQuestion').click(function (e) {
+                        e.preventDefault(); // same thing as above
+                        alert("you need to login for submition of yourAnswer");
+                    });
+   
+                }
+            })
+        });
+
+    </script>
+</body>
+</html>

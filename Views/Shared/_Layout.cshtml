@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+   
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.3.js"></script>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+
+ 
+
+    
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">C# Tutorial</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="~/Home/HomePage?concept=intro">Home</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["username"] == null || Session["password"] == null)
+                    {
+                        <li><button type="button" class="btn btn-info btn-sm" style="margin-top:10px; background-color:transparent" data-toggle="modal" data-target="#myModal">Sign Up</button></li>
+                    }
+                    else
+                    {
+                        @*
+                                <li class="dropdown">
+                                    <label class="dropdown-toggle " data-toggle="dropdown" style="color:whitesmoke; padding-top:12%">@Session["username"]<span class="caret"></span></label>
+                                <ul class="dropdown-menu">
+                                    <li><div> <img src="" class="glyphicon glyphicon-log-in" /><br />
+                                        <button type="button" onclick="return logout()" class="btn btn-group-justified blockquote-reverse" value="Log out">Log out</button>
+                                        </div></li>
+                                </ul>
+                            </li>
+                        *@
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">@Session["username"]<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-header">This Account is managend by CTutorial</div>
+                                        <div class="modal-content"><br /><br /> @Session["username"] <br /> <br /></div>
+                                        <div class="modal-footer">
+                                            <form action="~/Home/logout1"> <button type="submit" id="logout" class="btn-default bottom-right">Log out</button></form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    <li><a href="~/Home/CreateAccount" style="font-size:large "><span class="glyphicon glyphicon-log-in"></span> Create Account</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @*<input type="search" style="margin-left:35%; width:300px;height:30px" placeholder="Enter your Search"/>&nbsp;<button type="button" class="btn btn-danger">Search</button>*@
+
+    <div style="display:inline">
+        <ul class="navbar-right list-inline" style="display:inline ">
+            <li><a class="active" href="~/Home/HomeVideoPage" style="font-size:large; text-decoration:none ">Videos Tutorial</a></li>
+            <li><a href="~/Home/Question" style="font-size: large; text-decoration: none; ">Question</a></li>
+            @*<li><a href="#" style="font-size: large; text-decoration: none; ">Unanswered</a></li>*@
+            <li><a href="~/Home/AskQuestion" style="font-size: large; text-decoration: none; ">Ask Questions</a></li>
+            @if (Session["admin"] == "1" && Session["username"] != null)
+            {
+               
+            <li><a href="~/Home/uploadVideo" style="font-size: large; text-decoration: none; ">upload video &nbsp &nbsp &nbsp</a></li>
+            }
+
+        </ul>
+
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <br />
+                    <br />
+                    <form name="loginForm" action="~/Home/login" role="form" method="post">
+                        <input type="email" name="username" style="width:200px; height:30px; border-radius:7px" placeholder="Username" required /><br /><br />
+                        <input type="text" name="password" style="width: 200px; height: 30px; border-radius: 7px" placeholder="Password" required /><br />
+                        <br /><br /><button type="submit" class="btn btn-success">Sign In</button>
+                    </form>
+                    <br />
+                    <br />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer style="background-color:black">
+        <hr />
+        <div><label style="font-size:15px; display:inline; color:white; font-weight:bold; margin-left:50%;margin-right:50%"> &copy; 2015 </label></div>
+        <hr />
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+    <script>
+
+        $('#logout').click((function () {
+            $.get('~/Home/logout', function () {
+                //don't forget error checking, ommited
+                alert("jvhgj");
+                location.reload();
+            });
+        }));
+
+
+    </script>
+</body>
+</html>

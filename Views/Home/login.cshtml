@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>login</title>
+    
+
+</head>
+<body>
+    <div>
+        @if(Session["username"] == null || Session["password"] == null)
+        {
+            <label>access and not exist</label>
+            <label>@ViewBag.message</label>
+        }
+    </div>
+</body>
+</html>

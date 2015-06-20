@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateAccount</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+<body>
+    <br />
+    <br />
+    <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-3 left">
+                    <table style=" border: solid; width: 150px; height: 120px">
+                        <tr>
+                            <th style="border: solid; ">
+                                <div class="media-heading"> Topics</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="~/Home/HomePage?concept=intro">Intro </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="/Home/HomePage?concept=dataType">Data Type </a>
+                            </td>
+                        </tr>
+                      
+                    </table>
+                </div>
+
+
+                <div class="col-sm-7 " style="font-size:18px">
+                    <pre>
+                    @foreach(var x in Model)
+                    {
+                        @x
+                    }
+                </pre>
+
+                </div>
+
+                <div class="col-sm-1 right">
+                
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+﻿@*................Stongly Typed View.............................*@
+<!DOCTYPE html>
+@using Tutorial_Site.BussinessObjects
+
+@model  ModelViewBO
+           
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VideoTutorial</title>
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+    <link href="assets/css/video-default.css" rel="stylesheet">
+    <script type="text/javascript" src="assets/js/jquery.video-ui.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('#demo13').click(function () {
+                $.blockUI({
+                    theme: true,
+                    title: 'This is your title',
+                    message: '<p>This is your message.</p>',
+                    timeout: 2000
+                });
+            });
+        });
+
+        $('#demo1').videoUI();
+    </script>
+</head>
+<body>
+
+    @*<button id="demo13">,ncxm</button>*@
+
+    <form action="~/Home/searchVideo" method="post" role="form">
+        <input type="search" name="search" style="margin-left:35%; width:300px;height:30px" placeholder="Enter your Search" />&nbsp;
+        <input type="submit" class="btn btn-danger" value="Search">
+    </form>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class=" col-md-7 " >
+                <div>
+                    <video width="600" height="400" controls>
+                        <source src="~/Videos/@Model.CurrentPlayed.videoName" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div id=" video-detail">
+                    <div id="Video-title"><label style="font-size:18px; color:darkgrey; font-family:'Arial Rounded MT'"><br />@Model.CurrentPlayed.videoName</label></div>
+
+                    <div class="btn-group-justified" style="font-weight:bold; font-size:18px; color:firebrick">Comments</div>
+                    @*
+    <div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <label style="font-size:larger" class="dropdown-toggle "  data-toggle="dropdown" >Order By <span class="caret"></span></label>
+                <ul class="dropdown-menu">
+                    <li><a href="#">By Name</a></li>
+                    <li><a href="#">Date & Time </a></li>
+                    <li><a href="#">Likes</a></li>
+                </ul>
+            </li>
+            </ul>
+    </div>
+*@
+                    <br />
+                    <br />
+                    <hr  />
+                    <div>
+                        @if(Model.ListOfomnts1 != null)
+                        { 
+                            foreach (var x in Model.ListOfomnts1)
+                            {
+                                <div><label>@x.username</label></div>
+                                <div><label style="margin-left:40px">@x.comment1</label></div>
+                                <br />
+                                <hr />
+                            }
+                        }
+                        
+                    </div>
+                    <div>
+                        <form action="~/Home/submitComment?id=@Model.CurrentPlayed.Id" method="post">
+                            <input type="text" height="800" width="250" name="comment" />
+                            <button class="success" type="submit" value="Post" >Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+           <div class="col-md-1"></div>
+
+            <div class="col-md-5">
+                <br />
+                <br />
+                <br />
+                <br />
+                
+                    @foreach (var x in Model.ListOfVideo)
+                     {
+
+                        <table >
+                            <tr>
+                                <td>
+                                    <div class="alert-link" >
+                                        @*<iframe src="~//Videos/A.mp4" frameborder="0" allowfullscreen scrolling="no"></iframe>*@
+                                       
+                                        <a href="~/Home/VideoTutorial?id=@x.Id">
+                                            <video>
+                                                <source src="~/Videos/@x.videoName" type="video/mp4" />
+                                            </video>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                       <label style="font-feature-settings:on; font-size:14px; font-family:Andalus">@x.videoName</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                         <br />
+                        @*
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="col-lg-8 " style="border:double; float:left;">
+                                    <video width="300" height="250" style="float:left;">
+                                        <source src="~/Videos/A.mp4" type="video/mp4" />
+                                        //<track class="label" title="bgjhgsdjhsgjgdgdjsh" default />
+                                    </video>1
+
+                                </div>
+                                <div class="col-lg-4 " style="border:dotted">
+                                    mcbmdsnbv
+                                    vkjdbfdbj
+                                    bcxnbv
+                                </div>
+                               
+                            </div>
+                        </div> *@
+                    }
+
+                
+             </div>
+    </div>
+  </div>
+</body>
+</html>

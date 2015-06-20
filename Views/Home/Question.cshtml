@@ -1,0 +1,155 @@
+﻿@using Tutorial_Site.Models;
+@using Tutorial_Site.BussinessObjects;
+@model QuestionAnsModelViewBO
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Question</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    <br />
+    <br />
+    <br />
+    <form action="~/Home/searchQ" method="post" role="form">    
+        <input type="search" name="search" style="margin-left:35%; width:300px;height:30px" placeholder="Enter your Search" />&nbsp;
+        <input type="submit" class="btn btn-danger" value="Search">
+    </form>
+
+   
+    <br />
+    <br />
+    <div class="center-block" style="border:dashed; align-self:center;margin-left:15%; margin-right:15%">
+        
+        <div>
+
+            @foreach(var x in Model.Questions)
+            {
+                int sumLike = 0;
+                 <label style=" font-weight:bold;font-size:x-large">@x.question1</label>
+                <hr />
+                foreach(var y in Model.Answered)
+                { 
+                    if(y.qid == x.Id)
+                    {
+                        <div style="font-size:14px">
+                            <label>@y.answer</label>
+                              
+                            <form action="~/Home/test?id=@y.Id" role="form" method="post" >
+                             <button type="submit" id="@("like"+y.Id)"  onclick="like(@y.Id)" style="background-color:aqua">Like</button>&nbsp &nbsp &nbsp
+                            </form>
+                            
+                            @foreach(var z in Model.QLike)
+                            {
+                                
+                                if(z.aid == y.Id)
+                                {
+                                    sumLike++;
+                                }
+                            }
+                            <label id="orignal">@sumLike</label>@*<label id="changed@y.Id">@{sumLike = sumLike + 1;} @sumLike</label>*@
+                            @{sumLike = 0;}
+                            <hr />
+                        </div>
+                    }
+
+
+
+                }
+
+                <div id="post" >
+                    <form action="~/Home/submitAns?id= @x.Id" method="post" role="form">
+                        <input type="text" name="comment" placeholder="Your Answer" />
+                        <input type="submit" class="btn btn-primary" id="postAsn" value="post" />
+                    </form>
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/Home/getSession/", function (data) {
+
+                if (data == true) {
+
+                }
+                else {
+                    //$("#submitQuestion").hide();
+                    $('#postAsn').click(function (event) {
+                        event.preventDefault(); // same thing as above
+                    });
+
+                }
+            })
+        });
+
+        $('#changed').hide();
+
+       $('#like').ready(function () {
+            $.getJSON("/Home/likeQuestion", function (data) {
+                $('#changed').hide();
+                if(data == true)
+                {
+                    $('#orignal').hide();
+                    $('#changed').show();
+                }
+                else {
+                    $('#like').click(function (e) {
+                        e.preventDefault(); // same thing as above
+                        //e.stopPropagation();
+                        //$('#like').hide();
+                       // e.stopImmediatePropagation();
+                       // return false;
+                        alert(" dont fair");
+                    });
+                }
+            })
+        })
+        
+        function like(x)
+        { 
+             
+            var id ='like'+x;
+            $(document).ready(function () {
+                $.getJSON("/Home/likeQuestion", function (data) {
+                    //alert("it should run for every click");
+                  
+                    var chng = 'changed'+x;
+                    $(chng).hide();
+                    if(data == true)
+                    {
+                        $('#orignal').hide();
+                        $('#changed').show();
+                        alert(" dont fair 1");
+                    }
+                    else {
+                       
+                        $(id).click(function (e) {
+                            alert(" dont fair");
+                            e.preventDefault(); // same thing as above
+                            //e.stopPropagation();
+                            //$('#like').hide();
+                            // e.stopImmediatePropagation();
+                            // return false;
+                            
+                        });
+                    }
+                })
+            })
+        }
+
+    </script>
+
+</body>
+</html>

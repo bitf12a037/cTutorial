@@ -1,0 +1,30 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>uploadVideo</title>
+</head>
+<body>
+    <div>
+        <h2>uploadVideo</h2>
+
+        <form action="~/Home/save" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>File:</td>
+                    <td><input type="file" accept="video/*" name="file" id="File" /></td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" accept="video/*" name="submit" value="upload Video" /></td>
+                </tr>
+
+            </table>
+        </form>
+
+    </div>
+</body>
+</html>
